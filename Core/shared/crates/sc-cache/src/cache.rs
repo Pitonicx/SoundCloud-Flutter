@@ -32,9 +32,9 @@ pub struct StreamingConfig {
 impl Default for StreamingConfig {
     fn default() -> Self {
         Self {
-            storage_base: "https://storage.scdinternal.site".to_owned(),
-            stream_base: "https://stream.scdinternal.site".to_owned(),
-            stream_premium_base: "https://stream-star.scdinternal.site".to_owned(),
+            storage_base: "https://storage.scnative.dev".to_owned(),
+            stream_base: "https://stream.scnative.dev".to_owned(),
+            stream_premium_base: "https://stream-star.scnative.dev".to_owned(),
             hq: false,
         }
     }

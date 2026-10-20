@@ -73,6 +73,14 @@ jobs:
         run: |
           flutter pub get
           flutter build windows --release
+      - name: Bundle ffmpeg
+        shell: pwsh
+        run: |
+          Invoke-WebRequest -Uri "https://github.com/GyanD/codexffmpeg/releases/download/7.1/ffmpeg-7.1-essentials_build.zip" -OutFile ffmpeg.zip
+          Expand-Archive -Path ffmpeg.zip -DestinationPath ffmpeg_extracted
+          $ffmpegBin = Get-ChildItem -Path ffmpeg_extracted -Filter "ffmpeg.exe" -Recurse | Select-Object -First 1
+          Copy-Item -Path $ffmpegBin.FullName -Destination Desktop/app/build/windows/x64/runner/Release/ffmpeg.exe
+          Remove-Item -Recurse -Force ffmpeg.zip, ffmpeg_extracted
       - name: Package
         shell: pwsh
         run: |

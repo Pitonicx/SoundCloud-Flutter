@@ -98,6 +98,35 @@ pub(crate) fn ensure_ffmpeg() -> Result<(), CacheError> {
     if ffmpeg_sidecar::command::ffmpeg_is_installed() {
         return Ok(());
     }
+
+    if let Ok(exe) = std::env::current_exe() {
+        if let Some(dir) = exe.parent() {
+            let bin = if cfg!(windows) { dir.join("ffmpeg.exe") } else { dir.join("ffmpeg") };
+            if bin.is_file() {
+                unsafe { std::env::set_var("FFMPEG_PATH", &bin) };
+                if ffmpeg_sidecar::command::ffmpeg_is_installed() {
+                    return Ok(());
+                }
+            }
+        }
+    }
+
+    #[cfg(windows)]
+    {
+        if let Some(local_app_data) = std::env::var_os("LOCALAPPDATA") {
+            let candidate = std::path::PathBuf::from(local_app_data)
+                .join("com.soundcloud.desktop")
+                .join("ffmpeg")
+                .join("ffmpeg.exe");
+            if candidate.is_file() {
+                unsafe { std::env::set_var("FFMPEG_PATH", &candidate) };
+                if ffmpeg_sidecar::command::ffmpeg_is_installed() {
+                    return Ok(());
+                }
+            }
+        }
+    }
+
     ffmpeg_sidecar::download::auto_download().map_err(|e| CacheError::Transcode(e.to_string()))?;
     Ok(())
 }

@@ -9,7 +9,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
 /// Прокси картинок + постоянный диск-кэш. Внешние CDN (sndcdn и пр.) грузим не
-/// напрямую, а через наш домен `images.scdinternal.site` (контракт: `GET <base>/`
+/// напрямую, а через наш домен `images.scnative.dev` (контракт: `GET <base>/`
 /// + заголовок `X-Target: base64(url)`) — SNI запроса = наш домен, пассивный скан
 /// РКН не банит по `sndcdn`; плюс кэшируем на диск (как Tauri permanent image
 /// cache), чтобы не перекачивать каждый запуск. Свои домены и не-http — напрямую.
@@ -26,12 +26,14 @@ class ScImageProxy {
 
   /// Хосты, которые НЕ проксируем (наши/локальные) — точное совпадение или суффикс.
   static const _whitelist = [
+    'scnative.dev',
+    'scnative.space',
     'scdinternal.site',
     'localhost',
     '127.0.0.1',
   ];
 
-  /// Включить прокси+диск-кэш картинок. [base] — напр. `https://images.scdinternal.site`;
+  /// Включить прокси+диск-кэш картинок. [base] — напр. `https://images.scnative.dev`;
   /// [cacheDir] — каталог кэша приложения (картинки лягут в `<cacheDir>/images`).
   static void configure({String? base, String? cacheDir}) {
     _base = (base != null && base.isNotEmpty) ? base : null;

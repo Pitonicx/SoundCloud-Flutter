@@ -22,8 +22,8 @@ const DEFAULT_USER_AGENT: &str =
     "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36";
 
 /// Бэкенд-хосты приложения: основной и STAR-резерв (для премиум-failover).
-const MAIN_API: &str = "https://api.scdinternal.site";
-const STAR_API: &str = "https://api-star.scdinternal.site";
+const MAIN_API: &str = "https://api.scnative.dev";
+const STAR_API: &str = "https://api-star.scnative.dev";
 
 /// Период фоновой перепроверки подписки и health-пробинга хостов.
 const SUBSCRIPTION_REFRESH: Duration = Duration::from_secs(30);

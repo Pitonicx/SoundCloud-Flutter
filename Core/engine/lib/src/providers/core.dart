@@ -8,7 +8,7 @@ import '../rust/frb_generated.dart';
 import 'settings.dart';
 
 /// Прокси картинок: внешние CDN идут через наш RKN-safe домен (см. [ScImageProxy]).
-const _imageProxyBase = 'https://images.scdinternal.site';
+const _imageProxyBase = 'https://images.scnative.dev';
 
 /// Конфиг встраивания. Переопределяется в [ProviderScope] хостом.
 final scConfigProvider = Provider<ScEngineConfig>(

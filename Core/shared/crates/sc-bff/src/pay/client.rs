@@ -7,9 +7,9 @@ use sc_net::{HttpRequest, HttpResponse, NetClient, SessionSource};
 
 use crate::error::BffError;
 
-pub(crate) const PAY_BASE: &str = "https://pay.scdinternal.site";
+pub(crate) const PAY_BASE: &str = "https://pay.scnative.dev";
 
-/// Клиент платёжного сервиса (`pay.scdinternal.site`) поверх [`NetClient`].
+/// Клиент платёжного сервиса (`pay.scnative.dev`) поверх [`NetClient`].
 /// `UserCtx` на бэке резолвит `x-session-id` — навешиваем его **здесь** (sc-net
 /// токенов не знает).
 pub struct PayClient {

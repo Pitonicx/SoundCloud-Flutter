@@ -12,7 +12,7 @@ import 'mini_player_ipc.dart';
 void runMiniPlayer(String socketPath, {String? cacheDir}) {
   WidgetsFlutterBinding.ensureInitialized();
   // Картинки — через тот же прокси+диск-кэш, что и главный апп.
-  ScImageProxy.configure(base: 'https://images.scdinternal.site', cacheDir: cacheDir);
+  ScImageProxy.configure(base: 'https://images.scnative.dev', cacheDir: cacheDir);
   runApp(MiniPlayerApp(socketPath: socketPath));
 }
 
