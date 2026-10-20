@@ -83,7 +83,7 @@ class ScSettings {
   const ScSettings({
     this.perfMode = PerfMode.beauty,
     this.accent,
-    this.highQualityStreaming = false,
+    this.highQualityStreaming = true,
     this.lyricsVisualizer = false,
     this.startupTab = 0,
     this.language = 'ru',
@@ -193,7 +193,7 @@ class ScSettings {
           orElse: () => PerfMode.beauty,
         ),
         accent: json['accent'] as int?,
-        highQualityStreaming: json['highQualityStreaming'] as bool? ?? false,
+        highQualityStreaming: json['highQualityStreaming'] as bool? ?? true,
         lyricsVisualizer: json['lyricsVisualizer'] as bool? ?? false,
         startupTab: json['startupTab'] as int? ?? 0,
         language: json['language'] as String? ?? 'ru',

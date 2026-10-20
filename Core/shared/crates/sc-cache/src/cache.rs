@@ -35,7 +35,7 @@ impl Default for StreamingConfig {
             storage_base: "https://storage.scnative.dev".to_owned(),
             stream_base: "https://stream.scnative.dev".to_owned(),
             stream_premium_base: "https://stream-star.scnative.dev".to_owned(),
-            hq: false,
+            hq: true,
         }
     }
 }

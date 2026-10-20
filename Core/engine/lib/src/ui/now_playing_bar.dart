@@ -82,7 +82,7 @@ class _NowBarHostState extends ConsumerState<NowBarHost> {
         abLoopAwaitingB: transport.abLoopAwaitingB,
         liked: liked,
         disliked: _disliked,
-        quality: _quality(track),
+        quality: _quality(track, ref.watch(settingsProvider.select((s) => s.highQualityStreaming))),
         source: _source(track),
         downloadProgress:
             loading.loading ? (loading.percent ?? 0.0) : null,
@@ -181,11 +181,13 @@ class _NowBarHostState extends ConsumerState<NowBarHost> {
 }
 
 /// Бейдж качества из стораджа: явно высокое → HQ, иначе SQ; неизвестно → нет бейджа.
-NowBarQuality? _quality(TrackDto track) {
+NowBarQuality? _quality(TrackDto track, bool isHq) {
   final q = track.storageQuality?.toLowerCase();
-  if (q == null) return null;
-  if (q.contains('hq') || q.contains('high')) return NowBarQuality.hq;
-  return NowBarQuality.sq;
+  if (q != null) {
+    if (q.contains('hq') || q.contains('high')) return NowBarQuality.hq;
+    return NowBarQuality.sq;
+  }
+  return isHq ? NowBarQuality.hq : null;
 }
 
 /// Источник: отдаём из нашего стораджа → CDN-пилюля, иначе скрыт.
